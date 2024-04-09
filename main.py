@@ -27,7 +27,7 @@ def main() -> None:
     ) as context:
         root_console = tcod.console.Console(screen_width, screen_height, order="F")
         while True:
-            root_console.print(x=player_x, y=player_y, string="@")
+            root_console.print(x=player.x, y=player.y, string=player.char, fg=player.color)
 
             context.present(root_console)
 
@@ -41,8 +41,7 @@ def main() -> None:
                     continue
 
                 if isinstance(action, MovementAction):
-                    player_x += action.dx
-                    player_y += action.dy
+                    player.move(dx=action.dx, dy=action.dy)
 
                 elif isinstance(action, EscapeAction):
                     raise SystemExit()
